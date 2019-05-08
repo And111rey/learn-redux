@@ -13,10 +13,17 @@ let reducer = (state, action) => {
   }
 }
 
-const incrementAction = { type: "INC", amount: 1 };
-const decrementAction = { type: "DEC", amount: 1 };
-const resetAction = { type: "RES" };
 
+
+const increment = ( amount ) => {
+  return { type: "INC", amount }
+}
+const decrement = ( amount ) => {
+  return { type: "DEC", amount }
+}
+const reset = () => {
+  return {type: "RES"}
+}
 
 const store = createStore(reducer, initialState)
 
@@ -37,13 +44,15 @@ class Counter extends Component {
   }
 
   increment() {
-    store.dispatch(incrementAction);
+    let amount = parseInt(this.refs.amount.valuel || 1);
+    store.dispatch(increment(amount));
   }
   decrement() {
-    store.dispatch(decrementAction);
+    let amount = parseInt(this.refs.amount.value || 1);
+    store.dispatch(decrement(amount));
   }
   reset() {
-    store.dispatch(resetAction);
+    store.dispatch(reset());
   }
    render() {
 
@@ -59,6 +68,7 @@ class Counter extends Component {
 
           <button onClick={this.decrement} className="decrement">-</button>
         </div>
+        <input type="text" ref="amount" defaultValue="1"/>
        </div>
      )
    }
