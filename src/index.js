@@ -16,9 +16,21 @@ const reducer = (state, action) => {
     }
 }
 
-const incrementAcrion = { type: "INC", amount: 1 }
-const decrementAction = { type: "DEC", amount: 1 }
-const resetAction = { type: "RES" }
+// const incrementAcrion = { type: "INC", amount: 1 };
+// const decrementAction = { type: "DEC", amount: 1 };
+// const resetAction = { type: "RES" };
+
+const increment = (amount) => {
+  return { type: "INC", amount };
+};
+
+const decrement = (amount) =>{
+  return { type: "DEC", amount };
+}
+
+const reset = () => {
+  return { type: "RES" };
+};
 
 const store = createStore(reducer, initialState)
 
@@ -38,15 +50,17 @@ class Counter extends React.Component {
     }
   
     increment() {
-        store.dispatch(incrementAcrion); 
+        let amount =parseInt(this.refs.amount.value || 1);
+        store.dispatch(increment(amount)); 
     }
   
     decrement() {
-        store.dispatch(decrementAction);
+        let amount =parseInt(this.refs.amount.value || 1);
+        store.dispatch(decrement(amount));
     } 
 
     reset() {
-        store.dispatch(resetAction);
+        store.dispatch(reset);
     }
     render () {
         const count = store.getState().count;
@@ -58,6 +72,7 @@ class Counter extends React.Component {
             <button onClick={this.reset} >RES</button>
             <button onClick={this.increment}>+</button>
           </div>
+          < input type="text" ref="amount" defaultValue="1" />
         </div>
       );
     }
