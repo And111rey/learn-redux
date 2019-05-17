@@ -43,5 +43,4 @@ class App extends Component {
   }
 } 
 
-// cours https://coursehunters.net/course/udemy-reactjs-and-redux-mastering-web-apps
 export { App };
