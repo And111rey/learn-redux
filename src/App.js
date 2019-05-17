@@ -1,39 +1,47 @@
-// import React from "react";
-// // import ReactDOM from 'react-dom';
+import React, { Component} from 'react';
+import "./app.css";
+import Clock from "./clock";
 
 
+class App extends Component {
 
+  constructor(props) {
+    super(props)
 
-// class Counter extends React.Component {
-//   constructor(props) {
-//     super(props)
+    this.state = {
+      deadLine: "December 25, 2019", 
+      newDeadLine: ""
+    }
+  }
 
-//     this.state = { count: 0 }
+    changeDeadLine() {
+      console.log("state is :" , this.state);
+      this.setState({
+        deadLine: this.state.newDeadLine
+      })
+    }
+  render () {
 
-//     this.increment = this.increment.bind(this);
-//     this.decrement = this.decrement.bind(this);
-//   }
+   
+    return (
+      <div className="App">
+        <div className="App-title">CountDown { this.state.deadLine }</div>  
+        <div>
+          < Clock 
+            deadLine = {this.state.deadLine}
+          />
+        </div>
+        <div>
+          <input 
+            placeholder="New date"
+            onChange = {(event) => this.setState({newDeadLine: event.target.value}) }  
+          />
+          <button onClick={() => this.changeDeadLine()}>Submit</button> 
+        </div>   
+      </div>
+    );
+  }
+} 
 
-//   increment() {
-//     this.setState({ count: this.state.count + 1 });
-//   }
-
-//   decrement() {
-//     this.setState({ count: this.state.count -1 });
-//   } 
-//   render () {
-//     return (
-//       <div>
-//         <span> {this.state.count} </span>
-//         <div>
-//           <button onClick={this.decrement} >-</button>
-//           <button onClick={this.increment}>+</button>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// // ReactDom.render(< Counter />, document.getElementById("root"));
-// // ReactDOM.render(< Counter />, document.getElementById('root'));
-// export { Counter };
+// cours https://coursehunters.net/course/udemy-reactjs-and-redux-mastering-web-apps
+export { App };
